@@ -7,6 +7,23 @@
 - This project introduce a class `Page` which is `Drawable` and `Navigable`.
 - So that each `Page` can Represent its `Content` and `Navigation Info` in a single Python File
 
+## Project Structure
+under `src/python/`
+```
+- pages                  - root package for all pages
+  - music                - `music` section 
+    - jazz.py
+    - pop_song.py
+  - study                - `study` section
+    - helm.py
+    - python.py
+  - home.py
+- ui                     - helper methods & base class for consistent st-pages/streamlit usage 
+  - nav.py
+  - page.py              
+- app.py                 -  entrypoint of the application/ configure navigation(sidebar)
+```
+
 ## How to run
 
 ```

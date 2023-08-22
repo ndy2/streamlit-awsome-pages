@@ -23,7 +23,9 @@ class Authenticator:
             form_authenticated, form_authenticated_user = self._check_form_authentication(*login_form_with_input())
 
         authenticated = cookie_authenticated or form_authenticated
-        user = cookie_authenticated_user if cookie_authenticated else form_authenticated_user if form_authenticated else None
+        user = cookie_authenticated_user if cookie_authenticated \
+            else form_authenticated_user if form_authenticated \
+            else None
 
         return authenticated, user
 

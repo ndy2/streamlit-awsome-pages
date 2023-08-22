@@ -1,7 +1,6 @@
 import streamlit as st
 
-from python.auth.authenticator import Authenticator
-from python.pages.auth import app_authenticator
+from python.auth import app_authenticator, Authenticator
 from python.ui.page import Navigable, Drawable
 
 

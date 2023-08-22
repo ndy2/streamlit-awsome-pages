@@ -1,28 +1,29 @@
-import st_pages
+from pathlib import Path
+from typing import Dict
 
-from python.ui.page import Page
+from streamlit.source_util import get_pages, _on_pages_changed
+from streamlit.util import calc_md5
+
+from python.ui.page import Navigable
+
+StreamlitPages = Dict[str, Dict[str, str]]
 
 
-def draw_nav(
-        root_page: Page,
-        section_page_dictionary: dict[str, list[Page]]
+def add_navs(
+        *navs: Navigable
 ):
-    nav = [_to_st_page(root_page, False)]
-    for section, pages in section_page_dictionary.items():
-        section_icon = section[0]
-        section_name = section[2:]
-
-        nav.append(st_pages.Section(section_name, section_icon))
-        for page in pages:
-            nav.append(_to_st_page(page, True))
-
-    st_pages.show_pages(nav)
+    pages = get_pages("")
+    [add_nav(pages, nav) for nav in navs]
 
 
-def _to_st_page(page: Page, in_section: bool) -> st_pages.Page:
-    return st_pages.Page(
-        page.relative_path,
-        page.name,
-        page.icon,
-        in_section=in_section
-    )
+def add_nav(pages: StreamlitPages, nav: Navigable):
+    script_path = Path(nav.relative_path)
+    script_path_str = str(script_path.resolve())
+    psh = calc_md5(script_path_str)
+    pages[psh] = {
+        "page_script_hash": psh,
+        "page_name": nav.name,
+        "icon": nav.icon,
+        "script_path": script_path_str,
+    }
+    _on_pages_changed.send()

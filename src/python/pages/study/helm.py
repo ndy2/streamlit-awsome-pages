@@ -1,20 +1,17 @@
-import pathlib
-import sys
-
-sys.path.append(str(pathlib.Path().absolute()).split("/src")[0] + "/src")
-
 import streamlit as st
 
-from python.ui.page import Page
+from python.ui.page import Navigable, Drawable
 
 
-class Helm(Page):
+class HelmNav(Navigable):
     _path = "study.helm"
     name = "Helm Helm"
     icon = "❤️"
 
+
+class HelmDraw(Drawable):
     def draw(self):
         st.write("write your content here")
 
 
-Helm().draw_with_nav_indent()
+HelmDraw().draw_with_nav_indent()

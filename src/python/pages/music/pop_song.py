@@ -1,20 +1,17 @@
-import pathlib
-import sys
-
-sys.path.append(str(pathlib.Path().absolute()).split("/src")[0] + "/src")
-
 import streamlit as st
 
-from python.ui.page import Page
+from python.ui.page import Navigable, Drawable
 
 
-class PopSong(Page):
+class PopSongNav(Navigable):
     _path = "music.pop_song"
     name = "PopSong"
     icon = "🎶"
 
+
+class PopSongDraw(Drawable):
     def draw(self):
         st.write("this is pop_song page")
 
 
-PopSong().draw_with_nav_indent()
+PopSongDraw().draw()

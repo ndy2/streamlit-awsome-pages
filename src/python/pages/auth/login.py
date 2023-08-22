@@ -31,7 +31,7 @@ class _LoginUi:
         st.write(f"age : {user.age} ")
 
     @staticmethod
-    def authentication_failed_user():
+    def authentication_failed():
         st.write("login failed!")
 
 
@@ -42,7 +42,11 @@ class LoginDraw(Drawable):
         self.authenticator = authenticator
 
     def draw(self):
-        self.authenticator.check_cookie_and_form_authentication(_LoginUi.)
+        authenticated, user = self.authenticator.check_cookie_and_form_authentication(_LoginUi.login_form)
+        if authenticated:
+            _LoginUi.authenticated_user(user)
+        else:
+            _LoginUi.authentication_failed()
 
 
 LoginDraw(app_authenticator).draw()

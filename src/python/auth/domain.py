@@ -16,5 +16,5 @@ class UserSource:
     def add(self, user: User):
         self.users[user.username] = user
 
-    def load_by_username(self, username: str):
+    def load_by_username(self, username: str) -> User:
         return self.users.get(username)

@@ -13,6 +13,7 @@ def add_navs(
         *navs: Navigable
 ):
     pages = get_pages("")
+    pages.clear()
     [add_nav(pages, nav) for nav in navs]
 
 

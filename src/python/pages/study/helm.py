@@ -14,4 +14,4 @@ class HelmDraw(Drawable):
         st.write("write your content here")
 
 
-HelmDraw().draw_with_nav_indent()
+HelmDraw().draw()

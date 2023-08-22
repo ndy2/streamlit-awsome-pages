@@ -1,12 +1,6 @@
-import pathlib
-import sys
-
-from python.ui.page import Navigable, Drawable
-
-sys.path.append(str(pathlib.Path().absolute()).split("/src")[0] + "/src")
-
 import streamlit as st
 
+from python.ui.page import Navigable, Drawable
 
 
 class HomeNav(Navigable):
@@ -14,10 +8,11 @@ class HomeNav(Navigable):
     name = "Home Home"
     icon = "🏘"
 
+
 class HomeDraw(Drawable):
 
     def draw(self):
         st.write("this is home page")
 
 
-Home().draw()
+HomeDraw().draw()

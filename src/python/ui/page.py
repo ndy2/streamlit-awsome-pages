@@ -1,5 +1,5 @@
 import inspect
-from abc import ABCMeta, abstractmethod, ABC
+from abc import ABCMeta, abstractmethod
 
 import streamlit as st
 
@@ -37,5 +37,11 @@ class Drawable(metaclass=ABCMeta):
             self._draw()
 
 
-class Page(Navigable, Drawable, ABC):
-    pass
+class Page(Navigable, Drawable, metaclass=ABCMeta):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Page, cls).__new__(cls, *args, **kwargs)
+
+        return cls._instance

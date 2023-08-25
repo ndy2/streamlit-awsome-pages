@@ -1,6 +1,7 @@
 import inspect
-
 from abc import ABCMeta, abstractmethod
+
+import streamlit as st
 
 
 class Navigable(metaclass=ABCMeta):
@@ -10,16 +11,16 @@ class Navigable(metaclass=ABCMeta):
         return "src/python/pages/" + self._path.replace(".", "/") + ".py"
 
     @property
+    def icon(self):
+        return ""
+
+    @property
     @abstractmethod
     def _path(self): pass
 
     @property
     @abstractmethod
     def name(self): pass
-
-    @property
-    @abstractmethod
-    def icon(self): pass
 
 
 class Drawable(metaclass=ABCMeta):
@@ -29,6 +30,8 @@ class Drawable(metaclass=ABCMeta):
         pass
 
     def draw(self):
+        st.markdown("<style>.css-8hkptd {  color: black !important; }</style>", unsafe_allow_html=True)
+
         stack = inspect.stack()
         if stack[2][3] == '_run_script':
             self._draw()

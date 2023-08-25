@@ -6,7 +6,6 @@ from python.ui.page import Navigable, Drawable
 class PopSongNav(Navigable):
     _path = "music.pop_song"
     name = "PopSong"
-    icon = "🎶"
 
 
 class PopSongDraw(Drawable):

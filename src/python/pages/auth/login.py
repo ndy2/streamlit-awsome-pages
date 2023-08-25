@@ -7,7 +7,6 @@ from python.ui.page import Navigable, Drawable
 class LoginNav(Navigable):
     _path = "auth.login"
     name = "Login"
-    icon = "🎷"
 
 
 class _LoginUi:

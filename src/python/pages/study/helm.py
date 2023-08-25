@@ -6,7 +6,6 @@ from python.ui.page import Navigable, Drawable
 class HelmNav(Navigable):
     _path = "study.helm"
     name = "Helm Helm"
-    icon = "❤️"
 
 
 class HelmDraw(Drawable):

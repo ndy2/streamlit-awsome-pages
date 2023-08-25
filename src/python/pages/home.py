@@ -6,7 +6,6 @@ from python.ui.page import Navigable, Drawable
 class HomeNav(Navigable):
     _path = "home"
     name = "Home Home"
-    icon = "🏘"
 
 
 class HomeDraw(Drawable):

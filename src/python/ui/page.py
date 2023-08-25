@@ -1,3 +1,5 @@
+import inspect
+
 from abc import ABCMeta, abstractmethod
 
 
@@ -23,5 +25,10 @@ class Navigable(metaclass=ABCMeta):
 class Drawable(metaclass=ABCMeta):
 
     @abstractmethod
-    def draw(self):
+    def _draw(self):
         pass
+
+    def draw(self):
+        stack = inspect.stack()
+        if stack[2][3] == '_run_script':
+            self._draw()

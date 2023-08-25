@@ -40,7 +40,7 @@ class LoginDraw(Drawable):
         super().__init__()
         self.authenticator = authenticator
 
-    def draw(self):
+    def _draw(self):
         authenticated, user = self.authenticator.check_cookie_and_form_authentication(_LoginUi.login_form)
         if authenticated:
             _LoginUi.authenticated_user(user)

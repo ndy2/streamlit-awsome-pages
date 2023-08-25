@@ -10,7 +10,8 @@ class HelmNav(Navigable):
 
 
 class HelmDraw(Drawable):
-    def draw(self):
+    def _draw(self):
+        1 / 0
         st.write("write your content here")
 
 

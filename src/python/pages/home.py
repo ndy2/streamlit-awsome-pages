@@ -11,7 +11,7 @@ class HomeNav(Navigable):
 
 class HomeDraw(Drawable):
 
-    def draw(self):
+    def _draw(self):
         st.write("this is home page")
 
 

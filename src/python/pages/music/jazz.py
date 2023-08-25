@@ -10,7 +10,7 @@ class JazzNav(Navigable):
 
 
 class JazzDraw(Drawable):
-    def draw(self):
+    def _draw(self):
         st.write("this is jazz page")
 
 

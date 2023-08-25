@@ -11,7 +11,7 @@ class PythonNav(Navigable):
 
 class PythonDraw(Drawable):
 
-    def draw(self):
+    def _draw(self):
         st.write("It's good!")
 
 

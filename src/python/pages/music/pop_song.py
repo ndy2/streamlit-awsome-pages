@@ -10,7 +10,7 @@ class PopSongNav(Navigable):
 
 
 class PopSongDraw(Drawable):
-    def draw(self):
+    def _draw(self):
         st.write("this is pop_song page")
 
 

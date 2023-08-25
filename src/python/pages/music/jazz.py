@@ -1,16 +1,14 @@
 import streamlit as st
 
-from python.ui.page import Navigable, Drawable
+from python.ui.page import Page
 
 
-class JazzNav(Navigable):
+class JazzPage(Page):
     _path = "music.jazz"
     name = "JAZZY"
 
-
-class JazzDraw(Drawable):
     def _draw(self):
         st.write("this is jazz page")
 
 
-JazzDraw().draw()
+JazzPage().draw()

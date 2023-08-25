@@ -1,17 +1,15 @@
 import streamlit as st
 
-from python.ui.page import Navigable, Drawable
+from python.ui.page import Page
 
 
-class HelmNav(Navigable):
+class HelmPage(Page):
     _path = "study.helm"
     name = "Helm Helm"
 
-
-class HelmDraw(Drawable):
     def _draw(self):
         1 / 0
         st.write("write your content here")
 
 
-HelmDraw().draw()
+HelmPage().draw()

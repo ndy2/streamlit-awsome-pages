@@ -1,12 +1,7 @@
 import streamlit as st
 
 from python.auth import app_authenticator, Authenticator
-from python.ui.page import Navigable, Drawable
-
-
-class LoginNav(Navigable):
-    _path = "auth.login"
-    name = "Login"
+from python.ui.page import Page
 
 
 class _LoginUi:
@@ -33,7 +28,9 @@ class _LoginUi:
         st.write("login failed!")
 
 
-class LoginDraw(Drawable):
+class LoginPage(Page):
+    _path = "auth.login"
+    name = "Login"
 
     def __init__(self, authenticator: Authenticator) -> None:
         super().__init__()
@@ -47,4 +44,4 @@ class LoginDraw(Drawable):
             _LoginUi.authentication_failed()
 
 
-LoginDraw(app_authenticator).draw()
+LoginPage(app_authenticator).draw()

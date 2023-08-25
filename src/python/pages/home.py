@@ -1,17 +1,14 @@
 import streamlit as st
 
-from python.ui.page import Navigable, Drawable
+from python.ui.page import Page
 
 
-class HomeNav(Navigable):
+class HomePage(Page):
     _path = "home"
     name = "Home Home"
-
-
-class HomeDraw(Drawable):
 
     def _draw(self):
         st.write("this is home page")
 
 
-HomeDraw().draw()
+HomePage().draw()

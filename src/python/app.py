@@ -1,14 +1,16 @@
-from python.pages.home import HomePage
-from python.pages.music import MusicSection
-from python.pages.music.jazz import JazzPage
-from python.pages.music.pop_song import PopSongPage
-from python.pages.study import StudySection
-from python.pages.study.helm import HelmPage
-from python.pages.study.python import PythonPage
+from python.pages.auth.login import login_page
+from python.pages.home import home_page
+from python.pages.music import music_section, music_section_with_subpages
+from python.pages.music.jazz import jazz_page
+from python.pages.music.pop_song import pop_song_page
+from python.pages.study import study_section
+from python.pages.study.helm import helm_page
+from python.pages.study.python import python_page
 from python.ui.page_configurer import PageConfigurer
 
 PageConfigurer() \
-    .home_page(HomePage()) \
-    .section(MusicSection(), [JazzPage(), PopSongPage()]) \
-    .section(StudySection(), [PythonPage(), HelmPage()]) \
+    .home_page(home_page) \
+    .section(*music_section_with_subpages) \
+    .section(study_section, [python_page, helm_page]) \
+    .page(login_page) \
     .configure()

@@ -11,4 +11,4 @@ class JazzPage(Page):
         st.write("this is jazz page")
 
 
-JazzPage().draw()
+jazz_page = JazzPage().draw()

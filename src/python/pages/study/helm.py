@@ -12,4 +12,4 @@ class HelmPage(Page):
         st.write("write your content here")
 
 
-HelmPage().draw()
+helm_page = HelmPage().draw()

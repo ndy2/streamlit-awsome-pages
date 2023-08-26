@@ -1,6 +1,6 @@
 import streamlit as st
 
-from python.auth import app_authenticator, Authenticator
+from python.auth import Authenticator, app_authenticator
 from python.ui.page import Page
 
 
@@ -44,4 +44,4 @@ class LoginPage(Page):
             _LoginUi.authentication_failed()
 
 
-LoginPage(app_authenticator).draw()
+login_page = LoginPage(app_authenticator).draw()

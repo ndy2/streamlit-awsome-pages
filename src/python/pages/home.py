@@ -11,4 +11,4 @@ class HomePage(Page):
         st.write("this is home page")
 
 
-HomePage().draw()
+home_page = HomePage().draw()

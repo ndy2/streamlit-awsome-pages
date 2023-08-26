@@ -11,4 +11,4 @@ class PopSongPage(Page):
         st.write("this is pop_song page")
 
 
-PopSongPage().draw()
+pop_song_page = PopSongPage().draw()

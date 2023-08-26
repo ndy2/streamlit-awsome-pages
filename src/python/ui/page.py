@@ -5,6 +5,10 @@ import streamlit as st
 
 
 class Navigable(metaclass=ABCMeta):
+    """
+    Navigable is an abstract class that
+        contains some properties which used for create sidebar navigation
+    """
 
     @property
     @abstractmethod
@@ -24,24 +28,27 @@ class Navigable(metaclass=ABCMeta):
 
 
 class Drawable(metaclass=ABCMeta):
+    """
+    Drawable is an abstract class that
+        wraps _draw in template method pattern manner
+    """
 
     @abstractmethod
     def _draw(self):
         pass
 
     def draw(self):
-        st.markdown("<style>.css-8hkptd {  color: black !important; }</style>", unsafe_allow_html=True)
-
-        stack = inspect.stack()
-        if stack[2][3] == '_run_script':
+        ## draw() should work only if user clicked its navigation in sidebar
+        ## inspect.stack matches that scenario and prevent unintended invocation of draw by import page module
+        if inspect.stack()[2][3] == '_run_script':
+            st.markdown("<style>.css-8hkptd {  color: black !important; }</style>", unsafe_allow_html=True)
             self._draw()
+        return self
 
 
 class Page(Navigable, Drawable, metaclass=ABCMeta):
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Page, cls).__new__(cls, *args, **kwargs)
-
-        return cls._instance
+    """
+    Page = Navigable + Drawable
+        recommendation - use it as singleton, instantiate it in same python file with itself
+    """
+    pass

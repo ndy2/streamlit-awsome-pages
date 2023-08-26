@@ -1,5 +1,7 @@
 from streamlit_extras.switch_page_button import switch_page
 
+from python.pages.study.helm import HelmPage
+from python.pages.study.python import PythonPage
 from python.ui.page import Page
 
 
@@ -12,4 +14,5 @@ class StudySection(Page):
         switch_page("Let's study python")
 
 
-StudySection().draw()
+study_section = StudySection()
+study_section.draw()

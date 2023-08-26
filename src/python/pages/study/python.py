@@ -11,4 +11,4 @@ class PythonPage(Page):
         st.write("It's good!")
 
 
-PythonPage().draw()
+python_page = PythonPage().draw()

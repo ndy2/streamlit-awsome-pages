@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict
 
-from streamlit.source_util import get_pages
+from streamlit.source_util import get_pages, _on_pages_changed
 from streamlit.util import calc_md5
 from streamlit_extras.switch_page_button import switch_page
 
@@ -44,4 +44,5 @@ class PageConfigurer:
         return self
 
     def configure(self) -> None:
+        _on_pages_changed.send()
         switch_page(self._home_page.name)

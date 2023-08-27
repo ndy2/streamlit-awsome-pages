@@ -2,10 +2,9 @@ from dataclasses import asdict
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
-from extra_streamlit_components import CookieManager
-
+from python.auth import sessions, cookies
 from python.auth.domain import User, UserSource
-from python.auth.support import JwtService, SessionManager
+from python.auth.support import JwtService
 
 Authentication = tuple[bool, Optional[User]]
 NOT_AUTHENTICATED = False, None
@@ -16,15 +15,11 @@ class Authenticator:
 
     def __init__(self,
                  user_source: UserSource,
-                 jwt_service: JwtService,
-                 cookies: CookieManager,
-                 sessions: SessionManager
+                 jwt_service: JwtService
                  ) -> None:
         super().__init__()
-        self.user_source = user_source
-        self.jwt_service = jwt_service
-        self.cookies = cookies
-        self.sessions = sessions
+        self._user_source = user_source
+        self._jwt_service = jwt_service
         self._set_default_sessions()
 
     def check_form_authentication(self, login_form_with_input) -> tuple[Authentication, bool]:
@@ -43,18 +38,18 @@ class Authenticator:
     def check_cookie_authentication(self) -> Authentication:
         self._set_default_sessions()
         # check session authentication
-        if self.sessions.get("authenticated") and not self._expired(self.sessions.get("exp")):
-            return True, self.sessions.get("user")
-        if self.sessions.get("logout") is None:
+        if sessions.get("authenticated") and not self._expired(sessions.get("exp")):
+            return True, sessions.get("user")
+        if sessions.get("logout") is None:
             return NOT_AUTHENTICATED
 
         # check cookie authentication
-        cookie_token = self.cookies.get_all("token").get("token")
+        cookie_token = cookies.get_all("token").get("token")
         if cookie_token is None:
             return NOT_AUTHENTICATED
 
         # parse jwt payload
-        payload = self.jwt_service.decode(cookie_token)
+        payload = self._jwt_service.decode(cookie_token)
         if not self._expired(payload.get("exp")):
             cookie_user = User(
                 username=payload.get("username"),
@@ -66,29 +61,38 @@ class Authenticator:
         return NOT_AUTHENTICATED
 
     def _check_username_password_authentication(self, username, password) -> Authentication:
-        found_user = self.user_source.load_by_username(username)
+        found_user = self._user_source.load_by_username(username)
         if found_user is None or found_user.password != password:
             return NOT_AUTHENTICATED
         return True, found_user
 
     def _add_cookie(self, user: User):
         exp = self._exp_timestamp()
-        self.cookies.set(
+        cookies.set(
             cookie="token",
-            val=self.jwt_service.encode(asdict(user) | {"exp": exp.timestamp()}),
+            val=self._jwt_service.encode(asdict(user) | {"exp": exp.timestamp()}),
             expires_at=exp
         )
 
-    def _set_session_authentication_success(self, user: User):
-        self.sessions.set("authenticated", True)
-        self.sessions.set("user", user)
-        self.sessions.set("exp", self._exp_timestamp().timestamp())
+    @staticmethod
+    def _set_session_authentication_success(user: User):
+        sessions.set("authenticated", True)
+        sessions.set("user", user)
+        sessions.set("exp", Authenticator._exp_timestamp().timestamp())
 
-    def _set_default_sessions(self):
-        self.sessions.set_if_none("authenticated", False)
-        self.sessions.set_if_none("user", None)
-        self.sessions.set_if_none("logout", False)
-        self.sessions.set_if_none("exp", False)
+    @staticmethod
+    def _set_default_sessions():
+        sessions.set_if_none("authenticated", False)
+        sessions.set_if_none("user", None)
+        sessions.set_if_none("logout", False)
+        sessions.set_if_none("exp", False)
+
+    @staticmethod
+    def logout():
+        cookies.delete("token")
+        sessions.set("logout", True)
+        sessions.set("authenticated", None)
+        sessions.set("user", None)
 
     @staticmethod
     def _expired(exp_timestamp: float):

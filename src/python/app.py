@@ -8,7 +8,7 @@ from python.ui.page_configurer import PageConfigurer
 
 PageConfigurer() \
     .home_page(home_page) \
+    .page(login_page) \
     .section(*music_section_with_subpages) \
     .section(study_section, [python_page, helm_page]) \
-    .page(login_page) \
     .configure()

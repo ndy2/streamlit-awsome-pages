@@ -5,14 +5,14 @@ import streamlit as st
 
 
 class JwtService:
-    key = "key"
-    algorithm = "HS256"
+    _key = "key"
+    _algorithm = "HS256"
 
     def encode(self, payload: dict[str, Any]) -> str:
-        return jwt.encode(payload, self.key, self.algorithm)
+        return jwt.encode(payload, self._key, self._algorithm)
 
     def decode(self, token) -> dict[str, Any]:
-        return jwt.decode(token, self.key, self.algorithm)
+        return jwt.decode(token, self._key, self._algorithm)
 
 
 class SessionManager:

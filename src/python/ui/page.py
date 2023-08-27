@@ -3,6 +3,8 @@ from abc import ABCMeta, abstractmethod
 
 import streamlit as st
 
+from python.auth.logout_ui import logout_sidebar
+
 
 class Navigable(metaclass=ABCMeta):
     """
@@ -42,6 +44,7 @@ class Drawable(metaclass=ABCMeta):
         ## inspect.stack matches that scenario and prevent unintended invocation of draw by import page module
         if inspect.stack()[2][3] == '_run_script':
             st.markdown("<style>.css-8hkptd {  color: black !important; }</style>", unsafe_allow_html=True)
+            logout_sidebar.draw()
             self._draw()
         return self
 

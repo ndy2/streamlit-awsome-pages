@@ -1,6 +1,7 @@
 import streamlit as st
 
-from python.auth import Authenticator, app_authenticator
+from python.auth.authenticator import Authenticator
+from python.pages.auth import app_authenticator
 from python.ui.page import Page
 
 
@@ -37,11 +38,15 @@ class LoginPage(Page):
         self.authenticator = authenticator
 
     def _draw(self):
-        authenticated, user = self.authenticator.check_cookie_and_form_authentication(_LoginUi.login_form)
-        if authenticated:
-            _LoginUi.authenticated_user(user)
+        cookie_authenticated, cookie_user = self.authenticator.check_cookie_authentication()
+        if cookie_authenticated:
+            _LoginUi.authenticated_user(cookie_user)
         else:
-            _LoginUi.authentication_failed()
+            (form_authenticated, form_user), submit = self.authenticator.check_form_authentication(_LoginUi.login_form)
+            if form_authenticated:
+                _LoginUi.authenticated_user(form_user)
+            elif submit:
+                _LoginUi.authentication_failed()
 
 
 login_page = LoginPage(app_authenticator).draw()

@@ -4,7 +4,7 @@ from python.ui.page import Page
 
 
 class PythonPage(Page):
-    _path = "study.python"
+    path = "study.python"
     name = "Let's study python"
 
     def _draw(self):

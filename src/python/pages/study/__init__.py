@@ -6,7 +6,7 @@ from python.ui.page import Page
 
 
 class StudySection(Page):
-    _path = "study.__init__"
+    path = "study.__init__"
     name = "공부공부"
     icon = "📖"
 

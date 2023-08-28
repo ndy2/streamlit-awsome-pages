@@ -30,7 +30,7 @@ class _LoginUi:
 
 
 class LoginPage(Page):
-    _path = "auth.login"
+    path = "auth.login"
     name = "Login"
 
     def __init__(self, authenticator: Authenticator) -> None:

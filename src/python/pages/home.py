@@ -4,7 +4,7 @@ from python.ui.page import Page
 
 
 class HomePage(Page):
-    _path = "home"
+    path = "home"
     name = "Home Home"
 
     def _draw(self):

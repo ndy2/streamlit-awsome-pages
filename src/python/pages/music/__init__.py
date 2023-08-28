@@ -6,7 +6,7 @@ from python.ui.page import Page
 
 
 class MusicSection(Page):
-    _path = "music.__init__"
+    path = "music.__init__"
     name = "으막"
     icon = "🎵"
 

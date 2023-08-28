@@ -4,7 +4,7 @@ from python.ui.page import Page
 
 
 class JazzPage(Page):
-    _path = "music.jazz"
+    path = "music.jazz"
     name = "JAZZY"
 
     def _draw(self):

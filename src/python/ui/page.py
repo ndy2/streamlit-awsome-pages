@@ -14,18 +14,18 @@ class Navigable(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def _path(self): pass
+    def path(self) -> str: pass
 
     @property
     @abstractmethod
-    def name(self): pass
+    def name(self) -> str: pass
 
     @property
-    def relative_path(self):
-        return "src/python/pages/" + self._path.replace(".", "/") + ".py"
+    def relative_path(self) -> str:
+        return "src/python/pages/" + self.path.replace(".", "/") + ".py"
 
     @property
-    def icon(self):
+    def icon(self) -> str:
         return ""
 
 

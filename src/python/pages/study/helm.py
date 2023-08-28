@@ -4,7 +4,7 @@ from python.ui.page import Page
 
 
 class HelmPage(Page):
-    _path = "study.helm"
+    path = "study.helm"
     name = "Helm Helm"
 
     def _draw(self):
